@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aazhi Kindergarten Chatbot</title>
+    <title>Chatbot</title>
+    <meta name="keyword" content="Aazhi Kindergarten Chatbot, aazhi kindergarten chatbot, aazhikindergarten chatbot, aazhikindergarten, Aazhi Kindergarten, aazhi kindergarten">
+    <meta name="description" content="This is a Chatbot of Aazhi Kindergarten that helps you to know some information about Aazhi Kindergarten Training Centre.">
     <!-- Replace the existing link tag with an img tag for your logo -->
     <img src="chatbot.svg" alt="Our Logo" style="display:none;"> 
     <style>
@@ -183,17 +185,19 @@
 
     if (userInput === "hi" || userInput === "hii" || userInput === "hello") {
         return "Hello! I'm here. Any help?";
-    } else if (userInput.includes("location")) {
+    } else if (userInput.includes("location") || userInput.includes("where is aazhi kindergarten")) {
         return "Aazhi Kindergarten is located at:<br> No.11, 10th cross, Rajaji nagar, Lawspet, Puducherry 605008.<br><br> <strong>You can also view the location on Google Maps</strong> <a href='https://maps.app.goo.gl/owYdLP1YPRwauEU69' target='_blank'>here</a>.";
     } else if (userInput.includes("fees")) {
         return "Our Fees in Aazhi Kindergarten is <strong>Rs.10,000 (Per term)</strong>, and there are 2 terms per year. Contact us at <a href='tel:+916369400656'>+91 6369400656</a> for further details.";
+    } else if (userInput.includes("thank you") || userInput.includes("thanks") || userInput.includes("bye") || userInput.includes("thankyou")) {
+        return "Thank You. I'm here to answer your question about Aazhi Kindergarten. I think I've done my Best";
     } else if (userInput.includes("contact") || userInput.includes("phone") || userInput.includes("email")) {
         return "You can contact Aazhi Kindergarten at the following details:<br><br> Phone: +91 6369400656 <br><br> Gmail: aazhikindergarten@gmail.com <br><br> Whatsapp: +91 8870979288 <br><br> Instagram: @AazhiAcademy";
     } else if (userInput.includes("facilities")) {
         return "Please contact Aazhi Kindergarten directly for information about facilities.";
     } else if (userInput.includes("photos") || userInput.includes("photos of aazhi kindergarten")) {
         // Replace image URLs with the URLs of your images
-        return "Here are some photos of Aazhi Kindergarten:<br><br> <strong>Visit to view Gallery</strong>";
+        return "Here are some photos of Aazhi Kindergarten:<br><br> <strong>Visit to view Gallery</strong>. Soon to be uploaded";
     } else if (userInput.includes("go to aazhi kindergarten website") || userInput.includes("go to website")) {
         return "Sure! You can visit the Aazhi Kindergarten website <a href='https://aazhikindergarten.in/' target='_blank'>here</a>.";
     } else if (userInput.includes("developer") || userInput.includes("developer of this website")) {
