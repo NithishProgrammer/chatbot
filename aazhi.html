@@ -33,6 +33,7 @@
 
         .bot-message {
             background-color: #e0e0e0;
+            color: #2a52be;
         }
 
         input[type="text"] {
@@ -102,7 +103,7 @@
 
             var botResponse = getBotResponse(userInput);
             var botMessage = document.createElement("div");
-            botMessage.textContent = botResponse;
+            botMessage.innerHTML = botResponse; // Use innerHTML to render links
             botMessage.classList.add("message", "bot-message");
             chatLog.appendChild(botMessage);
 
@@ -119,13 +120,15 @@
             if (userInput === "hi" || userInput === "hii") {
                 return "Hello! I'm here. Any help?";
             } else if (userInput.includes("location")) {
-                return "Aazhi Kindergarten is located at: No. 2, 3rd Cross St, Temple Square, Thillai Nagar, Tiruchirappalli, Tamil Nadu 620018, India";
+                return "Aazhi Kindergarten is located at: No.11, 10th cross, Rajaji nagar, Lawspet, Puducherry 605008.";
             } else if (userInput.includes("fees")) {
-                return "Please contact Aazhi Kindergarten directly for information about fees.";
+                return "The Fees would be Rs.10,000 per term, and the term would be for 6 months";
             } else if (userInput.includes("contact") || userInput.includes("phone") || userInput.includes("email")) {
-                return "You can contact Aazhi Kindergarten at the following details: Phone: +91 98941 17499, Email: info@aazhikindergarten.in";
+                return "You can contact Aazhi Kindergarten at the following details: Phone: +91 98941 17499, Email: aazhikindergarten@gmail.com";
             } else if (userInput.includes("facilities")) {
-                return "Please contact Aazhi Kindergarten directly for information about facilities.";
+                return "Please contact Aazhi Kindergarten directly for information about facilities. Select contact to view information";
+            } else if (userInput.includes("go to aazhi kindergarten website") || userInput.includes("go to website")) {
+                return "Sure! You can visit the Aazhi Kindergarten website <a href='https://aazhikindergarten.in/' target='_blank'>here</a>.";
             } else {
                 return "I'm sorry, I didn't understand that.";
             }
@@ -133,4 +136,3 @@
     </script>
 </body>
 </html>
-
