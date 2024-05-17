@@ -10,10 +10,22 @@
             background-color: #f5f5f5;
         }
 
+        #chat-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        #chat-header img {
+            width: 100px; /* Adjust the width as needed */
+            height: auto;
+        }
+
         #chat-container {
             width: 100%;
             max-width: 400px; /* Limit chat container width for readability */
-            margin: 20px auto;
+            margin: 0 auto;
             padding: 20px;
             border-radius: 10px;
             background-color: #fff;
@@ -77,6 +89,9 @@
     </style>
 </head>
 <body>
+    <div id="chat-header">
+        <img src="chatbot.svg" alt="Chatbot Logo"> <!-- Replace "your-logo.png" with the path to your logo -->
+    </div>
     <div id="chat-container">
         <div id="chat-log"></div>
         <div id="suggestions">
@@ -93,7 +108,13 @@
 
     <script>
         function sendMessage() {
-            var userInput = document.getElementById("user-input").value;
+            var userInput = document.getElementById("user-input").value.trim(); // Trim whitespace
+
+            // Check if input is empty
+            if (userInput === "") {
+                return; // Exit function if input is empty
+            }
+
             var chatLog = document.getElementById("chat-log");
 
             var userMessage = document.createElement("div");
@@ -115,18 +136,18 @@
         }
 
         function getBotResponse(userInput) {
-            userInput = userInput.toLowerCase().trim(); // Convert input to lowercase and trim whitespace
+            userInput = userInput.toLowerCase(); // Convert input to lowercase
 
             if (userInput === "hi" || userInput === "hii") {
                 return "Hello! I'm here. Any help?";
             } else if (userInput.includes("location")) {
-                return "Aazhi Kindergarten is located at: No.11, 10th cross, Rajaji nagar, Lawspet, Puducherry 605008.";
+                return "Aazhi Kindergarten is located at: No. 2, 3rd Cross St, Temple Square, Thillai Nagar, Tiruchirappalli, Tamil Nadu 620018, India";
             } else if (userInput.includes("fees")) {
-                return "The Fees would be Rs.10,000 per term, and the term would be for 6 months";
+                return "Please contact Aazhi Kindergarten directly for information about fees.";
             } else if (userInput.includes("contact") || userInput.includes("phone") || userInput.includes("email")) {
-                return "You can contact Aazhi Kindergarten at the following details: Phone: +91 98941 17499, Email: aazhikindergarten@gmail.com";
+                return "You can contact Aazhi Kindergarten at the following details: Phone: +91 98941 17499, Email: info@aazhikindergarten.in";
             } else if (userInput.includes("facilities")) {
-                return "Please contact Aazhi Kindergarten directly for information about facilities. Select contact to view information";
+                return "Please contact Aazhi Kindergarten directly for information about facilities.";
             } else if (userInput.includes("go to aazhi kindergarten website") || userInput.includes("go to website")) {
                 return "Sure! You can visit the Aazhi Kindergarten website <a href='https://aazhikindergarten.in/' target='_blank'>here</a>.";
             } else {
