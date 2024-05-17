@@ -4,26 +4,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aazhi Kindergarten Chatbot</title>
+    <!-- Replace the existing link tag with an img tag for your logo -->
+    <img src="chatbot.svg" alt="Our Logo" style="display:none;"> 
     <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
 
         #chat-container {
             width: 100%;
-            max-width: 400px; /* Limit chat container width for readability */
-            margin: 0 auto;
-            padding: 20px;
-            border-radius: 10px;
+            max-width: 400px;
             background-color: #fff;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #chat-header {
+            background-color: #0082e6;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        #chat-log {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
         }
 
         .message {
             padding: 10px;
             border-radius: 5px;
             margin: 5px 0;
+            word-wrap: break-word;
         }
 
         .user-message {
@@ -37,39 +60,56 @@
         }
 
         input[type="text"] {
-            width: calc(100% - 80px); /* Adjusted width to accommodate for gap */
+            width: calc(100% - 80px);
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 5px;
+            margin: 0;
+            outline: none;
+            font-size: 16px;
         }
 
         button {
-            width: 50px;
+            width: 80px;
             padding: 10px;
             border: none;
             border-radius: 5px;
-            background-color: #4caf50;
+            background-color: #00BFFF;
             color: white;
             cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 16px;
+            margin: 10px;
         }
 
         button:hover {
-            background-color: #45a049;
+            background-color: #4B9CD3;
+        }
+
+        .suggestions {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 10px;
         }
 
         .suggestion {
-            display: inline-block;
-            margin-right: 10px;
-            margin-bottom: 10px;
             padding: 5px 10px;
             border: 1px solid #ccc;
             border-radius: 5px;
             cursor: pointer;
+            margin: 5px;
+            transition: background-color 0.3s;
+            font-size: 14px;
+        }
+
+        .suggestion:hover {
+            background-color: #f0f0f0;
         }
 
         .loader {
-            border: 4px solid #f3f3f3; /* Light grey */
-            border-top: 4px solid #3498db; /* Blue */
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
             border-radius: 50%;
             width: 20px;
             height: 20px;
@@ -82,45 +122,32 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-
-        /* More dynamic spinning effect */
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            50% { transform: rotate(180deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* Responsive styles */
-        @media screen and (max-width: 500px) {
-            #chat-container {
-                width: calc(100% - 40px);
-                max-width: none;
-            }
-        }
     </style>
 </head>
 <body>
     <div id="chat-container">
+        <div id="chat-header">
+            Aazhi Kindergarten Chatbot
+        </div>
         <div id="chat-log"></div>
-        <div id="suggestions">
+        <div class="suggestions">
             <div class="suggestion" onclick="selectSuggestion('location')">Location</div>
             <div class="suggestion" onclick="selectSuggestion('fees')">Fees</div>
             <div class="suggestion" onclick="selectSuggestion('contact')">Contact</div>
             <div class="suggestion" onclick="selectSuggestion('facilities')">Facilities</div>
             <div class="suggestion" onclick="window.open('https://nithishprogrammer.github.io/Nithish/', '_blank')">Developer</div>
+            <div class="suggestion" onclick="selectSuggestion('photos')">Photos</div>
         </div>
         <input type="text" id="user-input" placeholder="Type here...">
-        <br><br>
         <button onclick="sendMessage()">Send</button>
     </div>
 
     <script>
         function sendMessage() {
-            var userInput = document.getElementById("user-input").value.trim(); // Trim whitespace
+            var userInput = document.getElementById("user-input").value.trim();
 
-            // Check if input is empty
             if (userInput === "") {
-                return; // Exit function if input is empty
+                return;
             }
 
             var chatLog = document.getElementById("chat-log");
@@ -136,39 +163,46 @@
 
             setTimeout(function() {
                 var botResponse = getBotResponse(userInput);
-                chatLog.removeChild(loader); // Remove loader
+                chatLog.removeChild(loader);
                 var botMessage = document.createElement("div");
-                botMessage.innerHTML = botResponse; // Use innerHTML to render links
+                botMessage.innerHTML = botResponse;
                 botMessage.classList.add("message", "bot-message");
                 chatLog.appendChild(botMessage);
 
                 document.getElementById("user-input").value = "";
-            }, 1500); // Simulate delay for "thinking" process
+                chatLog.scrollTop = chatLog.scrollHeight;
+            }, 1500);
         }
 
         function selectSuggestion(suggestion) {
             document.getElementById("user-input").value = suggestion;
         }
 
-        function getBotResponse(userInput) {
-            userInput = userInput.toLowerCase(); // Convert input to lowercase
+       function getBotResponse(userInput) {
+    userInput = userInput.toLowerCase();
 
-            if (userInput === "hi" || userInput === "hii") {
-                return "Hello! I'm here. Any help?";
-            } else if (userInput.includes("location")) {
-                return "Aazhi Kindergarten is located at: No. 2, 3rd Cross St, Temple Square, Thillai Nagar, Tiruchirappalli, Tamil Nadu 620018, India";
-            } else if (userInput.includes("fees")) {
-                return "Please contact Aazhi Kindergarten directly for information about fees.";
-            } else if (userInput.includes("contact") || userInput.includes("phone") || userInput.includes("email")) {
-                return "You can contact Aazhi Kindergarten at the following details: Phone: +91 98941 17499, Email: info@aazhikindergarten.in";
-            } else if (userInput.includes("facilities")) {
-                return "Please contact Aazhi Kindergarten directly for information about facilities.";
-            } else if (userInput.includes("go to aazhi kindergarten website") || userInput.includes("go to website")) {
-                return "Sure! You can visit the Aazhi Kindergarten website <a href='https://aazhikindergarten.in/' target='_blank'>here</a>.";
-            } else {
-                return "I'm sorry, I didn't understand that.";
-            }
-        }
+    if (userInput === "hi" || userInput === "hii" || userInput === "hello") {
+        return "Hello! I'm here. Any help?";
+    } else if (userInput.includes("location")) {
+        return "Aazhi Kindergarten is located at:<br> No.11, 10th cross, Rajaji nagar, Lawspet, Puducherry 605008.<br><br> <strong>You can also view the location on Google Maps</strong> <a href='https://maps.app.goo.gl/owYdLP1YPRwauEU69' target='_blank'>here</a>.";
+    } else if (userInput.includes("fees")) {
+        return "Our Fees in Aazhi Kindergarten is <strong>Rs.10,000 (Per term)</strong>, and there are 2 terms per year. Contact us at <a href='tel:+916369400656'>+91 6369400656</a> for further details.";
+    } else if (userInput.includes("contact") || userInput.includes("phone") || userInput.includes("email")) {
+        return "You can contact Aazhi Kindergarten at the following details:<br><br> Phone: +91 6369400656 <br><br> Gmail: aazhikindergarten@gmail.com <br><br> Whatsapp: +91 8870979288 <br><br> Instagram: @AazhiAcademy";
+    } else if (userInput.includes("facilities")) {
+        return "Please contact Aazhi Kindergarten directly for information about facilities.";
+    } else if (userInput.includes("photos") || userInput.includes("photos of aazhi kindergarten")) {
+        // Replace image URLs with the URLs of your images
+        return "Here are some photos of Aazhi Kindergarten:<br><br> <strong>Visit to view Gallery</strong>";
+    } else if (userInput.includes("go to aazhi kindergarten website") || userInput.includes("go to website")) {
+        return "Sure! You can visit the Aazhi Kindergarten website <a href='https://aazhikindergarten.in/' target='_blank'>here</a>.";
+    } else if (userInput.includes("developer") || userInput.includes("developer of this website")) {
+        return "The Aazhi Kindergarten Website and this Chatbot was developed by Nithish S. View Nithish's profile <a href='https://nithishprogrammer.github.io/Nithish/' target='_blank'>here</a>.";
+    } else {
+        return "I'm sorry, I didn't understand that.";
+    }
+}
+
     </script>
 </body>
 </html>
