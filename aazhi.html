@@ -218,7 +218,7 @@ window.onload = function() {
     function sendWelcomeMessage() {
         var chatLog = document.getElementById("chat-log");
         var welcomeMessage = document.createElement("div");
-        welcomeMessage.innerHTML = "Welcome! How can I help you?";
+        welcomeMessage.innerHTML = "<h3>Welcome! How can I help you?</h3>";
         welcomeMessage.classList.add("message", "bot-message");
         chatLog.appendChild(welcomeMessage);
         chatLog.scrollTop = chatLog.scrollHeight;
