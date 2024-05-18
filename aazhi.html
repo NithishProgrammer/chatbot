@@ -189,6 +189,27 @@
                 document.getElementById("user-input").value = "";
                 chatLog.scrollTop = chatLog.scrollHeight;
             }, 1500);
+
+             setTimeout(function() {
+                if (navigator.onLine) {
+                    var botResponse = getBotResponse(userInput);
+                    chatLog.removeChild(loader);
+                    var botMessage = document.createElement("div");
+                    botMessage.innerHTML = botResponse;
+                    botMessage.classList.add("message", "bot-message");
+                    chatLog.appendChild(botMessage);
+
+                    document.getElementById("user-input").value = "";
+                    chatLog.scrollTop = chatLog.scrollHeight;
+                } else {
+                    var offlineMessage = document.createElement("div");
+                    offlineMessage.innerHTML = "No network connection";
+                    offlineMessage.classList.add("message", "bot-message");
+                    offlineMessage.style.color = "red";
+                    chatLog.appendChild(offlineMessage);
+                    chatLog.removeChild(loader);
+                }
+            }, 700);
         }
 
         function selectSuggestion(suggestion) {
