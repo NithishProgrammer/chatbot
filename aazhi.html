@@ -208,7 +208,27 @@
     } else {
         return "<p>I'm sorry, I didn't understand that.</p> <style> p{color: red;} </style>";
     }
+
+
 }
+
+window.onload = function() {
+    console.log("Page loaded!"); // Add this line to check if the event fires
+    // Function to send a welcome message when the page loads
+    function sendWelcomeMessage() {
+        var chatLog = document.getElementById("chat-log");
+        var welcomeMessage = document.createElement("div");
+        welcomeMessage.innerHTML = "Welcome! How can I help you?";
+        welcomeMessage.classList.add("message", "bot-message");
+        chatLog.appendChild(welcomeMessage);
+        chatLog.scrollTop = chatLog.scrollHeight;
+    }
+
+    // Call the function to send the welcome message
+    sendWelcomeMessage();
+};
+
+
 
     </script>
 </body>
